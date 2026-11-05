@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>Воронка найма — Отчёт</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&display=swap');
+  :root {
+    --bg: #F2F5FA;
+    --card: #FFFFFF;
+    --border: #E1E6EE;
+    --accent: #8B5CF6;
+    --accent-deep: #6D28D9;
+    --accent-tint: #ECE6FB;
+    --accent-soft: #C4B5FD;
+    --text: #131514;
+    --muted: #556265;
+    --green: #059669;
+    --red: #E11D48;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Manrope', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    padding: 24px 16px 48px;
+    font-size: 15px;
+    line-height: 1.6;
+  }
+  .container { max-width: 820px; margin: 0 auto; }
+  header {
+    background: var(--card);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    border-left: 4px solid var(--accent);
+    padding: 28px;
+    margin-bottom: 20px;
+  }
+  header h1 { font-size: 22px; font-weight: 800; margin-bottom: 6px; }
+  .meta { color: var(--muted); font-size: 13px; margin-top: 4px; }
+  .badge {
+    display: inline-block;
+    background: var(--accent-tint);
+    color: var(--accent-deep);
+    border: 1px solid var(--accent-soft);
+    border-radius: 20px;
+    padding: 2px 10px;
+    font-size: 12px;
+    font-weight: 700;
+    margin-right: 6px;
+    margin-bottom: 8px;
+  }
+  section {
+    background: var(--card);
+    border-radius: 20px;
+    border: 1px solid var(--border);
+    padding: 24px;
+    margin-bottom: 20px;
+  }
+  section h2 {
+    font-size: 17px;
+    font-weight: 800;
+    color: var(--accent-deep);
+    margin-bottom: 16px;
+  }
+  /* Tables */
+  .data-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+  }
+  .data-table th {
+    background: var(--bg);
+    color: var(--muted);
+    font-weight: 700;
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--border);
+  }
+  .data-table td {
+    padding: 8px 12px;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  .data-table tr:last-child td { border-bottom: none; }
+  .data-table .num { font-weight: 700; color: var(--accent); }
+  .data-table .pct { color: var(--muted); font-size: 12px; }
+  /* Conversion bar */
+  .conv-bar-wrap {
+    background: var(--bg);
+    border-radius: 8px;
+    height: 8px;
+    width: 100%;
+    margin-top: 4px;
+    overflow: hidden;
+  }
+  .conv-bar {
+    background: var(--accent);
+    height: 8px;
+    border-radius: 8px;
+  }
+  /* Offer stats */
+  .stat-row {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-top: 4px;
+  }
+  .stat-pill {
+    background: var(--bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: 700;
+  }
+  .stat-pill span { color: var(--accent); }
+  /* Action items */
+  .action-item {
+    display: flex;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    align-items: flex-start;
+  }
+  .action-item:last-child { border-bottom: none; }
+  .action-num {
+    background: var(--accent);
+    color: #fff;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 800;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .anon-note {
+    background: var(--accent-tint);
+    border-left: 3px solid var(--accent);
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 13px;
+    color: var(--accent-deep);
+    margin-top: 16px;
+  }
+  footer {
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+    margin-top: 24px;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <div>
+    <span class="badge">Воронка</span>
+    <span class="badge">HR</span>
+  </div>
+  <h1>Воронка найма: <span id="period">[период]</span></h1>
+  <div class="meta">
+    Дата отчёта: <span id="report-date">[дата]</span> ·
+    labopsai
+  </div>
+</header>
+
+<!-- Card 1: Candidates by stage -->
+<section>
+  <h2>Кандидаты по этапам</h2>
+  <table class="data-table" id="stages-table">
+    <thead>
+      <tr>
+        <th>Вакансия</th>
+        <th>Рекрутёр</th>
+        <th>Этап</th>
+        <th>Кандидатов</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>[Вакансия 1]</td>
+        <td>[Рекрутёр]</td>
+        <td>[Этап]</td>
+        <td class="num">[N]</td>
+      </tr>
+      <tr>
+        <td>[Вакансия 2]</td>
+        <td>[Рекрутёр]</td>
+        <td>[Этап]</td>
+        <td class="num">[N]</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Card 2: Funnel conversion -->
+<section>
+  <h2>Конверсия воронки</h2>
+  <table class="data-table" id="conversion-table">
+    <thead>
+      <tr>
+        <th>Этап → Следующий</th>
+        <th>Прошло</th>
+        <th>Конверсия</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Новый → Телефонный отбор</td>
+        <td class="num">[N] из [M]</td>
+        <td>
+          <div>[X]%</div>
+          <div class="conv-bar-wrap">
+            <div class="conv-bar" style="width:[X]%"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Телефонный отбор → Интервью</td>
+        <td class="num">[N] из [M]</td>
+        <td>
+          <div>[X]%</div>
+          <div class="conv-bar-wrap">
+            <div class="conv-bar" style="width:[X]%"></div>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Интервью → Оффер</td>
+        <td class="num">[N] из [M]</td>
+        <td>
+          <div>[X]%</div>
+          <div class="conv-bar-wrap">
+            <div class="conv-bar" style="width:[X]%"></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Card 3: Rejection reasons -->
+<section>
+  <h2>Причины отказов</h2>
+  <table class="data-table" id="rejections-table">
+    <thead>
+      <tr>
+        <th>Причина</th>
+        <th>Количество</th>
+        <th>% от всех отказов</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>[Причина 1]</td>
+        <td class="num">[N]</td>
+        <td class="pct">[X]%</td>
+      </tr>
+      <tr>
+        <td>[Причина 2]</td>
+        <td class="num">[N]</td>
+        <td class="pct">[X]%</td>
+      </tr>
+      <tr>
+        <td>Причина не указана</td>
+        <td class="num">[N]</td>
+        <td class="pct">[X]%</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- Card 4: Offer and time-to-close (show only if data available) -->
+<section>
+  <h2>Оффер и сроки</h2>
+  <div class="stat-row">
+    <div class="stat-pill">Офферов выдано: <span>[N]</span></div>
+    <div class="stat-pill">Принято: <span>[N] ([X]%)</span></div>
+    <div class="stat-pill">Среднее время закрытия: <span>[N] дней</span></div>
+  </div>
+  <div class="anon-note" style="margin-top:16px">
+    Раздел строится только если поля «оффер» и «дата закрытия» есть в выгрузке.
+  </div>
+</section>
+
+<!-- Card 5: 3 conclusions -->
+<section>
+  <h2>3 вывода для планёрки</h2>
+  <div id="actions">
+    <div class="action-item">
+      <div class="action-num">1</div>
+      <div>[Конкретный вывод по данным]</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">2</div>
+      <div>[Конкретный вывод по данным]</div>
+    </div>
+    <div class="action-item">
+      <div class="action-num">3</div>
+      <div>[Конкретный вывод по данным]</div>
+    </div>
+  </div>
+  <div class="anon-note">
+    Имена кандидатов в отчёт не включаются.
+  </div>
+</section>
+
+<footer>
+  <p>labopsai · <a href="https://labopsai.pro" target="_blank">labopsai.pro</a></p>
+</footer>
+
+</div>
+</body>
+</html>

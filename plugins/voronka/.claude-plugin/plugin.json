@@ -1,0 +1,11 @@
+{
+  "name": "voronka",
+  "version": "0.1.0",
+  "description": "Воронка найма — из выгрузки HR-системы строит недельный отчёт: кандидаты по этапам и вакансиям, конверсии воронки, причины отказов, 3 вывода для планёрки.",
+  "author": {
+    "name": "labopsai"
+  },
+  "homepage": "https://labopsai.pro",
+  "license": "MIT",
+  "keywords": ["hr", "recruitment", "funnel", "analytics", "report", "hiring"]
+}

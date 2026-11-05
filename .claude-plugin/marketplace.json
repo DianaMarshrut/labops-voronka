@@ -1,0 +1,27 @@
+{
+  "name": "labopsai-voronka",
+  "owner": {
+    "name": "labopsai"
+  },
+  "metadata": {
+    "description": "Капсула labopsai «Воронка найма» — недельный отчёт по найму: кандидаты по этапам, потери в воронке, причины отказов, 3 вывода для планёрки",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "voronka",
+      "source": "./plugins/voronka",
+      "description": "Воронка найма — из выгрузки HR-системы: кандидаты по этапам и вакансиям, потери воронки, причины отказов, 3 вывода для планёрки",
+      "version": "0.1.0",
+      "category": "productivity",
+      "keywords": [
+        "hr",
+        "recruitment",
+        "funnel",
+        "analytics",
+        "report",
+        "hiring"
+      ]
+    }
+  ]
+}
